@@ -1,4 +1,4 @@
-package Lab3;
+package Lab.Lab3;
 
 /**
  * @author Tanvir Rahman

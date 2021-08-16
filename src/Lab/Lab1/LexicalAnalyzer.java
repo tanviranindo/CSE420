@@ -1,4 +1,4 @@
-package Lab1;
+package Lab.Lab1;
 
 /**
  * @author Tanvir Rahman
@@ -23,7 +23,7 @@ public class LexicalAnalyzer {
 
     public static void main(String[] args) throws IOException {
         try {
-            String filename = "input.txt";
+            String filename = "src/Lab/Lab1/input.txt";
             BufferedReader br = new BufferedReader(new FileReader(filename));
             String line;
             while ((line = br.readLine()) != null) {

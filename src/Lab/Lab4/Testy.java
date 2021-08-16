@@ -1,9 +1,9 @@
-package Lab4;
+package Lab.Lab4;
 
 import java.util.Scanner;
 
 public class Testy {
-    public class StringBufferExample1 {
+    public static class StringBufferExample1 {
         public static void main(String[] args) {
             System.out.println("Enter string1: ");
             Scanner sc = new Scanner(System.in);
@@ -22,7 +22,7 @@ public class Testy {
         }
     }
 
-    public class StringBufferExample2 {
+    public static class StringBufferExample2 {
         public static void main(String[] args) {
             System.out.println("Enter string1: ");
             Scanner sc = new Scanner(System.in);

@@ -1,8 +1,8 @@
 
 //    public static void main(String[] args) {
 //        try {
-////            URL url = A.class.getResource("C:\\Users\\tanvi\\IdeaProjects\\CSE420\\src\\Lab\\Lab4\\input.txt");
-//            File f = new File("src/Lab/Lab4/input.txt");
+////            URL url = A.class.getResource("C:\\Users\\tanvi\\IdeaProjects\\CSE420\\src\\Lab\\Lab.Lab4\\input.txt");
+//            File f = new File("src/Lab/Lab.Lab4/input.txt");
 //            //File f = new File("E:\\workspaces\\CSE420-Lab\\src\\CSE420Lab04akaLabQuiz01\\input.txt");
 //            Scanner sc = new Scanner(f);
 //
@@ -64,7 +64,7 @@
 //    public static void main(String[] args) throws Exception {
 //
 //
-//        String path = "src/Lab/Lab4/input.txt";
+//        String path = "src/Lab/Lab.Lab4/input.txt";
 //        List<String> adder = new ArrayList<>();
 //
 //        try {

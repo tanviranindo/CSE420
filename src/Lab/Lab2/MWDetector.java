@@ -1,4 +1,4 @@
-package Lab2;
+package Lab.Lab2;
 
 /**
  * @author Tanvir Rahman
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class MWDetector {
     public static void main(String[] args) {
-        String path = "src/Lab/Lab2/input.txt";
+        String path = "src/Lab/Lab2/input1.txt";
 //         String path = "src/Lab/Lab2/input.txt";
         int i = 0;
         try {
