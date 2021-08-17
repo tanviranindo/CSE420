@@ -1,15 +1,23 @@
 public class A {
-abstract void test();
-A() {
+abstract void test() ; //for abstract class
+A()
+{
 int count = 0;
 for(int i = 0; i<10; i++) count++;
 if(a!=b) count++;
 }
-int x, int y;
-public int []  add(int a, int b)
-{ return a+b;
+void A() throws FileNotFoundException
+{ int count = 0;
+for(int i = 0; i<10; i++) {
+count++;
 }
-public static List < String > subtract(int a, int b)  {
+if(a!=b) count++;
+}
+int x, int y;
+public int [] add(int a, int b) { return a+b;
+}
+public static List < String > subtract(int a, int b)
+{
  return a-b;
 }
 public void add()

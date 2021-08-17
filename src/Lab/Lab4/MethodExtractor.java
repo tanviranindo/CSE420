@@ -7,7 +7,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class MethodExtractor {
-
+    //Fix 142
     //LINE 126 + Single line multiple methods, indentation problems (int \n [])
 
     /*
@@ -35,28 +35,25 @@ public class MethodExtractor {
             Stack<Character> add = new Stack<>();
             StringBuilder method = new StringBuilder();
             StringBuilder returnType = new StringBuilder();
-            String temporary = input.nextLine();
-            input2.nextLine();
-            if (temporary.isEmpty()) continue;
+            String line = input.nextLine();
+            if (input2.hasNext()) input2.nextLine(); //Needed for new line curly brace cases
+            if (line.isEmpty()) continue;
+            boolean isValid = false;
+            if (input2.hasNext()) isValid = foundCurly(line, input2.next());
 
-            boolean isFound = false;
-            if (input.hasNext()) isFound = temporary.contains("{") || input2.next().equals("{");
-
-
-            for (char c : temporary.toCharArray()) {
+            for (char c : line.toCharArray()) {
                 add.push(c);
             }
 
             while (!add.isEmpty()) {
-                if (add.peek().equals(';')) {
-                    add.pop();
-//                    break;
-                } else if (isFound && add.peek().equals(')')) {
+                if (add.peek().equals(';')) { //Removing ;
+                    add.pop(); // break;
+                } else if (add.peek().equals(')') && isValid) { //
                     method.append(add.pop()); //Closing parenthesis
                     while (!add.isEmpty() && !add.peek().equals('(')) {
                         method.append(add.pop()); //Arguments
                     }
-                    duplicate(add, method);
+                    arguments(add, method);
                     if (!add.isEmpty() && add.peek().equals('.')) return;
                     if (!add.isEmpty() && add.peek().equals(' ')) add.pop(); //Space handling for return type
                     while (!add.isEmpty() && !add.peek().equals(' ')) {
@@ -75,7 +72,7 @@ public class MethodExtractor {
                             while (!add.isEmpty() && !add.peek().equals('[')) {
                                 returnType.append(add.pop()); //If spaces found
                             }
-                            duplicate(add, returnType);
+                            arguments(add, returnType);
                         } else returnType.append(add.pop()); //Basic return type
                     }
                 }
@@ -112,7 +109,7 @@ public class MethodExtractor {
 
     }
 
-    private static void duplicate(Stack<Character> add, StringBuilder returnType) {
+    private static void arguments(Stack<Character> add, StringBuilder returnType) {
         if (!add.isEmpty()) returnType.append(add.pop()); //Opening parenthesis
         if (!add.isEmpty() && add.peek().equals(' ')) returnType.append(add.pop()); //Space handling for method
         while (!add.isEmpty() && !add.peek().equals(' ')) {
@@ -120,9 +117,29 @@ public class MethodExtractor {
         }
     }
 
-    public static boolean foundCurly(String line) {
-
-        return true;
+    public static boolean foundCurly(String line, String newLine) {
+        int idx = line.indexOf(')');
+        int idx1 = line.indexOf('{');
+        if (idx >= 0) {
+            /*
+             * Three cases are possible as extra spaces were handled
+             * 1. if there is no space between closing parenthesis and opening curly
+             * 2. if there is only a space between them
+             * 3. if throws has been called if those found
+             * 4. 1 and 2 has to be side by side if the case is not 3
+             * */
+            if (idx < idx1) {
+                String temp = line.substring(idx, idx1 + 1);
+                return temp.equals("){") || temp.equals(") {") || temp.contains("throws");
+            } else if (idx1 == -1) {
+                //if closing parenthesis ")" is the last character in the line
+                //or exception has been thrown after ")"
+                if (idx == line.length() - 1 || line.substring(idx).contains("throws")) {
+                    return newLine.equals("{");
+                }
+            }
+        }
+        return false;
     }
 
     public static boolean constructorChecker(String file, String method) { //How it should be handled (ST)
@@ -156,18 +173,18 @@ public class MethodExtractor {
                     } else result.append(a); //Non commented string
                     break;
                 case 1:
-                    if (a.equals("\n")) {
+                    if (a.equals("\n")) { //Appending new line and restating
                         state = 0;
                         result.append("\n");
                     }
                     break;
                 case 3:
-                    if (a.equals("\n")) {
+                    if (a.equals("\n")) { //Appending new line and restating
                         state = 2;
                         result.append("\n");
                     }
                 case 2:
-                    while (a.equals("*") && input.hasNext()) {
+                    while (a.equals("*") && input.hasNext()) { //Searching for block comment ending state
                         if (input.next().equals("/")) {
                             state = 0;
                             break;
