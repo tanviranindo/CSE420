@@ -23,10 +23,15 @@ public class MethodExtractor {
         Scanner input = new Scanner(new File("src/Lab/Lab4/input.txt"));
         StringBuilder file = new StringBuilder();
         while (input.hasNextLine()) {
-            file.append(input.nextLine().trim().replaceAll(" +", " ")); //Extra space handling
+            file.append(input.nextLine().trim()); //Removes whitespace from both sides
             file.append("\n");
         }
-        String newFile = removeComments(file.toString());
+
+
+        String newFile = indentationRE(file.toString()); //
+//        String newFile = indentationWORE(file.toString());
+
+        /* System.out.println(newFile); */
         input = new Scanner(newFile);
         Scanner input2 = new Scanner(newFile);
         StringBuilder finalResult = new StringBuilder();
@@ -88,14 +93,14 @@ public class MethodExtractor {
                         && !m.contains("try") && !m.contains("do") && !m.contains(".")) {
 
                     boolean isConstructor = constructorChecker(newFile, method.toString());
-
-                    if (!returnType.isEmpty()) {
-                        result.append(", return type: ");
-                        returnType.reverse();
-                        result.append(returnType);
-                    } else {
+                    if (isConstructor) result.append(", type: constructor"); //There might be corner cases
+                    else {
                         //Special case for default constructor
-                        if (isConstructor) result.append(", type: constructor"); //There might be corner cases
+                        if (!returnType.isEmpty()) {
+                            result.append(", return type: ");
+                            returnType.reverse();
+                            result.append(returnType);
+                        }
                     }
                     if (!finalResult.toString().contains(result)) {
                         finalResult.append(result).append("\n");
@@ -123,17 +128,17 @@ public class MethodExtractor {
         if (idx >= 0) {
             /*
              * Three cases are possible as extra spaces were handled
-             * 1. if there is no space between closing parenthesis and opening curly
-             * 2. if there is only a space between them
-             * 3. if throws has been called if those found
+             * 1. If there is no space between closing parenthesis and opening curly
+             * 2. If there is only a space between them
+             * 3. If throws has been called if those found
              * 4. 1 and 2 has to be side by side if the case is not 3
              * */
             if (idx < idx1) {
                 String temp = line.substring(idx, idx1 + 1);
                 return temp.equals("){") || temp.equals(") {") || temp.contains("throws");
             } else if (idx1 == -1) {
-                //if closing parenthesis ")" is the last character in the line
-                //or exception has been thrown after ")"
+                // If closing parenthesis ")" is the last character in the line
+                // Or exception has been thrown after ")"
                 if (idx == line.length() - 1 || line.substring(idx).contains("throws")) {
                     return newLine.equals("{");
                 }
@@ -142,7 +147,7 @@ public class MethodExtractor {
         return false;
     }
 
-    public static boolean constructorChecker(String file, String method) { //How it should be handled (ST)
+    public static boolean constructorChecker(String file, String method) { //How it should be handled (Need to ask ST)
         StringTokenizer input = new StringTokenizer(file);
         String constructor;
         while (input.hasMoreTokens()) {
@@ -154,6 +159,61 @@ public class MethodExtractor {
             }
         }
         return false;
+    }
+
+    //With Regex
+    public static String indentationRE(String file) {
+        file = file.replaceAll(" +", " ") //Removes extra white spaces
+                .replaceAll("//.*|/\\*(.|\\n)*?\\*/", "") //Removes comments
+                .replaceAll("\"(.*?)\"", "") //Removes String
+                .replaceAll("(?m)^[ \t]*\r?\n", ""); //Removes extra lines
+        System.out.println(file);
+        return file;
+    }
+
+    //Without Regex
+    public static String indentationWORE(String file) {
+        file = removeExtraSpaces(file);
+        file = removeComments(file);
+        file = removeExtraLines(file);
+        file = removeStringLines(file);
+
+        return file;
+    }
+
+    public static String removeExtraSpaces(String file) {
+        StringTokenizer st = new StringTokenizer(file, " ");
+        StringBuilder sb = new StringBuilder();
+
+        while (st.hasMoreElements()) {
+            sb.append(st.nextElement()).append(" ");
+        }
+        return sb.toString();
+    }
+
+    public static String removeExtraLines(String file) {
+        StringTokenizer st = new StringTokenizer(file, "\n");
+        StringBuilder sb = new StringBuilder();
+
+        while (st.hasMoreElements()) {
+            sb.append(st.nextElement()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public static String removeStringLines(String file) {
+        StringBuilder sb = new StringBuilder();
+        char[] arr = file.toCharArray();
+        int found = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == '"' && found == 0) {
+                found = 1;
+            } else if (arr[i] == '"' && found == 1) {
+                found = 0;
+            } else if (found == 0) sb.append(arr[i]);
+        }
+
+        return sb.toString();
     }
 
     public static String removeComments(String file) {
@@ -192,7 +252,6 @@ public class MethodExtractor {
                     }
             }
         }
-        input.close();
         return result.toString();
     }
 }
