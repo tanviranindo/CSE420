@@ -1,31 +1,71 @@
 public class A {
-abstract void                                 test() ; //for abstract class
-A()
-{
-int count = 0;
-for(int i = 0; i<10; i++) count++;
-if(a!=b) count++;
+private static int x = 2;
+private static int y = 3;
+private static int count = 0;
 }
-void A() throws FileNotFoundException
-{ int count = 0;
-for(int i = 0; i<10; i++) {
+abstract void                                    test() ; //for abstract class
+A(){
+//Empty constructor
+}
+public static void cute(){ int count = 0;
+for(int i = 0; i < 10; i++) {
 count++;
+while(true){
+if(x == y) break;
+else System.out.println("CUTE");
 }
+}
+}
+public static String methodErName(int [] a, int [] b) {
 System.out.println("public int [] add(int a, int b) { return a+b;}");
 if(a!=b) count++;
 }
-public int [] add(int a, int b) { return a+b;
-                    }
 int x, int y;
-public int [] add2(int a, int b) { return a+b;
+void A() {
+count = x + 2 * y;
+}
+public static String inputNai(String a) throws Exception, IOException, Exception{ //Comment + Exception
+StringBuilder result = new StringBuilder();
+Scanner input = new Scanner(new File("src\Filename.txt")); \\A string
+while(input.next()){
+result.append(a).("\n"); \\A string
+}
+return a.toString();
+}
+public int [] add2(int a, int b){ return a+b;
+}
+public String [] add2(int a){ return a+b;
 }
 public static List < String > subtract(int a, int b)
-{
- return a-b;
+{ for(int i = 0; i<10; i++) {
+ count++;
+ }
+return a-b;
 }
 public void add()
-{ return x+y;
+{ for(int i = 0; i<10; i++) {
+  count++;
+  }return x+y;
 }
-public String filterString(String code) {
+public static void main(String [] args)
+{ System.out.println(subtract(5,10)); A a=new A(); a.add(20,10);
+if(2 == 3) {System.out.println("public static void okay(String line)");} \\A string
+}
+//Code
+/** KI
+* 1. okay
+* 2. nah okay nah
+* 3. onek okay
+*/
+//Test My Method()
+private String filterString(String code) {
+// lets say code = "some code //comment inside"
+   count++;
+// return the string "some code" (without the comment)
+for(int i = 0; i<10; i++) {
+/* What
+ *  to
+ *  do ?
+ */
 }
 }
