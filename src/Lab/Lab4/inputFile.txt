@@ -1,44 +1,15 @@
 public class A {
-abstract void                                    test() ; //for abstract class
-A()
-{
-int count = 0;
-for(int i = 0; i<10; i++) count++;
-if(a!=b) count++;
-}
-void A()                      throws FileNotFoundException
-{ int count = 0;
-for(int i = 0; i<10; i++) {
-count++;
-}
-System.out.println("public int [] add(int a, int b) { return a+b;}");
-if(a!=b) count++;
-}
 int x, int y;
-public int [] add2(int a, int b) { return a+b;
+public int add(int a, int b)
+{ return a+b;
 }
-public static List < String > subtract(int a, int b)
-{for(int i = 0; i<10; i++) {
- count++;
- }
-return a-b;
+public static int subtract(int a, int b)
+{ return a-b;
 }
 public void add()
-{ for(int i = 0; i<10; i++) {
-  count++;
-  }return x+y;
+{ return x+y;
 }
 public static void main(String [] args)
-{ System.out.println(subtract(5,10)); A a=new A(); a.add(20,10);
+{ System.out.println(subtract(10,5)); A a=new A(); a.add(20,10);
 }
-if(2 == 3) {System.out.println("public static void okay(String line)");}
-//Test My Method()
-private String filterString(String code) {
-// lets say code = "some code //comment inside"
-
-// return the string "some code" (without the comment)
-}for(int i = 0; i<10; i++) {
-   count++;
-   }
-
 }
