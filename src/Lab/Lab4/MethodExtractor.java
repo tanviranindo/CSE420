@@ -1,17 +1,16 @@
 package Lab.Lab4;
 
-/**
- * @author Tanvir Rahman
- * @ID 19101268
- * @Section 05
- */
-
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+/**
+ * @author Tanvir Rahman
+ * @ID 19101268
+ * @Section 05
+ * */
 
 public class MethodExtractor {
 

@@ -1,17 +1,17 @@
 package Lab.Lab1;
 
-/**
- * @author Tanvir Rahman
- * @ID 19101268
- * @Section 05
- */
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * @author Tanvir Rahman
+ * @ID 19101268
+ * @Section 05
+ */
 
 public class LexicalAnalyzer {
     private static final List<String> keywords = new ArrayList<>();

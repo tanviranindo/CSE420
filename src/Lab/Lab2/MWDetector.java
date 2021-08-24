@@ -1,15 +1,15 @@
 package Lab.Lab2;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  * @author Tanvir Rahman
  * @ID 19101268
  * @Section 05
  */
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class MWDetector {
     public static void main(String[] args) {

@@ -1,11 +1,5 @@
 package Lab.Lab3;
 
-/**
- * @author Tanvir Rahman
- * @ID 19101268
- * @Section 05
- */
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -13,6 +7,12 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
+/**
+ * @author Tanvir Rahman
+ * @ID 19101268
+ * @Section 05
+ */
 
 public class RegexValidator {
     public static void main(String[] args) {
@@ -58,3 +58,4 @@ public class RegexValidator {
         }
     }
 }
+
